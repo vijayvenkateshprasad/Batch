@@ -1,0 +1,33 @@
+<div style="margin: 50px;">
+  <div *ngFor="let job of jobs | async">
+    ProposalId: {{proposalId}}
+    <div class="alert" style="width: 100px;margin:auto" [ngClass]="getStateStyle(job.State)">
+      {{job.Name}}
+      <i class="glyphicon glyphicon-copy"></i>
+    </div>
+    <div class="d-flex flex-wrap">
+      <div class="d-flex flex-column m-3" *ngFor="let task of job.Tasks; let taskIndex = index">
+        <div class="d-flex flex-row justify-content-center">
+          <div class="alert shadow" [ngClass]="getStateStyle(task.State)">
+            {{task.Name}}
+            <span style="position: absolute; right: 0;top: 0;" class="badge">
+              {{taskIndex + 1}}
+            </span>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div style="width: 150px;" *ngFor="let activity of task.Activities; let activityIndex = index"
+            class="alert m-3 shadow" [ngClass]="getStateStyle(activity.State)">
+            {{activity.Name}}
+            <span style="position: absolute; right: 0;top: 0;" class="badge">{{taskIndex + 1}} -
+              {{activityIndex + 1 }}
+            </span>
+            <a style="position: absolute; right: 0;bottom: 0;" title="Open Splunk" href="http://www.google.com">
+              O
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
